@@ -13,9 +13,8 @@
 </template>
 <script lang="ts" setup>
 import CharacterItem from "@/components/character/CharacterItem.vue";
-import { useCharacter } from "@/composables/useCharacter";
+import { useCharacters } from "@/composables/useCharacters";
 
-const { characters, getAllCharacters } = useCharacter();
+const { characters } = useCharacters();
 
-getAllCharacters();
 </script>

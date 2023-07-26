@@ -6,8 +6,8 @@ export interface GetAllCharactersInterface {
 export interface Info {
   count: number;
   pages: number;
-  next: string;
-  prev: null;
+  next: null | string;
+  prev: null | string;
 }
 
 export interface Character {
@@ -47,7 +47,7 @@ export enum Status {
   Unknown = "unknown",
 }
 
-export const initCharacter = {
+export const initCharacter: Character = {
   id: 0,
   name: "",
   status: Status.Alive,
