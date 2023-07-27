@@ -27,8 +27,8 @@ export function useCharacters() {
   };
 
   const verifyBottom = () => {
-    const scrollY = window.scrollY; // Obtener la posición actual del scroll vertical
-    const alturaTotal = document.documentElement.scrollHeight; // Altura total del contenido de la página
+    const scrollY = document.getElementById("body")?.scrollTop || 0; // Obtener la posición actual del scroll vertical
+    const alturaTotal = document.getElementById("body")?.scrollHeight || 0; // Altura total del contenido de la página
     const alturaVentana = window.innerHeight; // Altura visible del navegador
 
     // Si la suma de la posición actual del scroll y la altura visible del navegador es mayor o igual a la altura total,
@@ -38,11 +38,11 @@ export function useCharacters() {
 
   onMounted(() => {
     getAllCharacters();
-    window.addEventListener("scroll", getAllCharacters);
+    document.getElementById("body")?.addEventListener("scroll", getAllCharacters);
   });
 
   onBeforeUnmount(() => {
-    window.removeEventListener("scroll", getAllCharacters);
+    document.getElementById("body")?.removeEventListener("scroll", getAllCharacters);
   });
 
   return {

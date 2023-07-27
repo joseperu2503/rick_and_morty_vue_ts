@@ -1,16 +1,20 @@
 <template>
   <div class="fixed top-0 right-0 left-0 z-10">
     <div
-      class="h-32 pb-12 w-full bg-gradient-to-b from-black fixed z-20 top-0 px-8 flex items-center justify-between lg:justify-center"
+      class="h-32 pb-12 w-full bg-gradient-to-b from-black fixed z-20 top-0 px-8 flex items-center justify-between"
     >
-      <div class="static position lg:absolute left-8 z-2">
+      <div>
         <img
           src="@/assets/logo.png"
           class="h-14 cursor-pointer"
           @click="goHome"
         />
       </div>
-      <nav class="hidden text-white text-xl sm:flex gap-4">
+      <i
+        class="fas fa-bars text-white text-2xl sm:hidden"
+        @click="toggleSidebar"
+      ></i>
+      <nav class="hidden text-white text-xl sm:flex gap-8">
         <router-link active-class="active" to="/" class="neon"
           >Home</router-link
         >
@@ -27,49 +31,44 @@
       class="bg-black w-full h-20 fixed top-0 z-10"
       :style="`opacity: ${opacity};`"
     ></div>
+    <div
+      class="fixed top-0 right-0 left-0 bottom-0 bg-black/70 z-10 backdrop-blur-sm transition-all"
+      :class="[sidebar ? 'translate-x-0' : 'translate-x-full']"
+    >
+      <div
+        class="flex h-full flex-col items-center justify-center text-white text-xl sm:flex gap-4"
+      >
+        <router-link
+          active-class="active"
+          to="/"
+          class="neon"
+          @click="toggleSidebar"
+          >Home</router-link
+        >
+        <router-link
+          active-class="active"
+          to="/characters"
+          class="neon"
+          @click="toggleSidebar"
+          >Characters</router-link
+        >
+        <router-link
+          active-class="active"
+          to="/locations"
+          class="neon"
+          @click="toggleSidebar"
+          >Locations</router-link
+        >
+        <!-- <router-link active-class="active" to="/episodes" class="neon" @click="toggleSidebar">Episodes</router-link> -->
+      </div>
+    </div>
   </div>
-  <div class="absolute z-20 right-8 h-20 flex items-center">
-    <i
-      class="fas fa-bars text-white text-2xl sm:hidden"
-      @click="toggleSidebar"
-    ></i>
-  </div>
+
   <div
-    class="w-full min-h-screen px-8 fondo pt-32 md:pt-40 pb-16 md:pb-36 z-0"
-    @scroll="scroll"
+    class="fixed top-0 bottom-0 left-0 right-0 overflow-y-auto px-8 fondo pt-32 md:pt-40 pb-16 md:pb-36 z-0"
+    id="body"
   >
     <router-view />
-  </div>
-  <div
-    class="fixed top-0 right-0 left-0 bottom-0 bg-black/70 z-10 backdrop-blur-sm transition-all"
-    :class="[sidebar ? 'translate-x-0' : 'translate-x-full']"
-  >
-    <div
-      class="flex h-full flex-col items-center justify-center text-white text-xl sm:flex gap-4"
-    >
-      <router-link
-        active-class="active"
-        to="/"
-        class="neon"
-        @click="toggleSidebar"
-        >Home</router-link
-      >
-      <router-link
-        active-class="active"
-        to="/characters"
-        class="neon"
-        @click="toggleSidebar"
-        >Characters</router-link
-      >
-      <router-link
-        active-class="active"
-        to="/locations"
-        class="neon"
-        @click="toggleSidebar"
-        >Locations</router-link
-      >
-      <!-- <router-link active-class="active" to="/episodes" class="neon" @click="toggleSidebar">Episodes</router-link> -->
-    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -91,17 +90,17 @@ const toggleSidebar = () => {
 
 onMounted(() => {
   scroll();
-  window.addEventListener("scroll", scroll);
+  document.getElementById("body")?.addEventListener("scroll", scroll);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("scroll", scroll);
+  document.getElementById("body")?.removeEventListener("scroll", scroll);
 });
 
 const scroll = () => {
-  let scroll = window.scrollY;
-  if (scroll <= 80) {
-    opacity.value = scroll / 80;
+  let scroll = document.getElementById("body")?.scrollTop;
+  if (scroll != undefined && scroll <= 180) {
+    opacity.value = scroll / 180;
   } else {
     opacity.value = 1;
   }
