@@ -1,23 +1,23 @@
 import { http } from "@/http/http.service";
-import { GetAllCharactersInterface } from "@/interfaces/character.interface.ts";
-import { useCharacterStore } from "@/stores/character";
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { GetAllLocartionsInterface } from "@/interfaces/location.interface.ts";
+import { useLocationStore } from "@/stores/location";
 import { storeToRefs } from "pinia";
-import { onBeforeUnmount, onMounted, ref } from "vue";
 
-export function useCharacters() {
-  const characterStore = useCharacterStore();
+export function useLocations() {
+  const locationStore = useLocationStore();
 
-  const { characters, nextPageCharacters } = storeToRefs(characterStore);
+  const { locations, nextPageLocations } = storeToRefs(locationStore);
   const loadMore = ref(true);
 
-  const getAllCharacters = () => {
-    if (nextPageCharacters.value && verifyBottom() && loadMore.value) {
+  const getAllLocations = () => {
+    if (nextPageLocations.value && verifyBottom() && loadMore.value) {
       loadMore.value = false;
       http
-        .get<GetAllCharactersInterface>(nextPageCharacters.value)
+        .get<GetAllLocartionsInterface>(nextPageLocations.value)
         .then((response) => {
-          characters.value.push(...response.data.results);
-          nextPageCharacters.value = response.data.info.next;
+          locations.value.push(...response.data.results);
+          nextPageLocations.value = response.data.info.next;
           loadMore.value = true;
         })
         .catch((error) => {
@@ -37,20 +37,20 @@ export function useCharacters() {
   };
 
   onMounted(() => {
-    getAllCharacters();
+    getAllLocations();
     document
       .getElementById("body")
-      ?.addEventListener("scroll", getAllCharacters);
+      ?.addEventListener("scroll", getAllLocations);
   });
 
   onBeforeUnmount(() => {
     document
       .getElementById("body")
-      ?.removeEventListener("scroll", getAllCharacters);
+      ?.removeEventListener("scroll", getAllLocations);
   });
 
   return {
-    getAllCharacters,
-    characters,
+    getAllLocations,
+    locations,
   };
 }

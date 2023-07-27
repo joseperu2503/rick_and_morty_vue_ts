@@ -1,33 +1,14 @@
 import { http } from "@/http/http.service";
 import { ref, watch } from "vue";
-import {
-  Location,
-  GetAllLocartionsInterface,
-  initLocation,
-} from "@/interfaces/location.interface.ts";
+import { Location, initLocation } from "@/interfaces/location.interface.ts";
 
-import {
-  Character
-} from "@/interfaces/character.interface.ts";
+import { Character } from "@/interfaces/character.interface.ts";
 
 import { useCharacter } from "@/composables/useCharacter";
 
 export function useLocation() {
-  const locations = ref<Location[]>([]);
-
-  const getAllLocations = () => {
-    http
-      .get<GetAllLocartionsInterface>("location")
-      .then((response) => {
-        locations.value = response.data.results;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const location = ref<Location>(initLocation);
-  const residents = ref<Character[]>()
+  const residents = ref<Character[]>();
 
   const { characters, getSomeCharacters } = useCharacter();
 
@@ -37,9 +18,9 @@ export function useLocation() {
       .then((response) => {
         location.value = response.data;
 
-        let residentsId: string[] = []
+        let residentsId: string[] = [];
 
-        location.value.residents.map(url => {
+        location.value.residents.map((url) => {
           const parts = url.split("/");
           const id = parts[parts.length - 1];
           residentsId.push(id);
@@ -47,7 +28,7 @@ export function useLocation() {
         // console.log('residentsId',this.residentsId)
         if (residentsId.length > 0) {
           let someCharacters = residentsId.join(",");
-          getSomeCharacters(someCharacters)
+          getSomeCharacters(someCharacters);
         }
       })
       .catch((error) => {
@@ -56,14 +37,12 @@ export function useLocation() {
   };
 
   watch(characters, () => {
-    residents.value = characters.value
-  })
+    residents.value = characters.value;
+  });
 
   return {
-    getAllLocations,
-    locations,
     getLocation,
     location,
-    residents
+    residents,
   };
 }

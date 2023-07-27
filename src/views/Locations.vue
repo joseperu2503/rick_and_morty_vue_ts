@@ -1,21 +1,15 @@
 <template>
-  <div class="px-0  pb-24">
-    <div class="backdrop-blur-sm bg-white/10 rounded-3xl px-10 pb-8 max-w-4xl mx-auto">
-      <div class="flex flex-col">
-        <LocationItem v-for="item in locations" :key="item.id" :location="item"/>
-      </div>
+  <div class="rounded-3xl pb-8 max-w-7xl mx-auto">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8"
+    >
+      <LocationItem v-for="item in locations" :key="item.id" :location="item" />
     </div>
-
   </div>
 </template>
 <script lang="ts" setup>
 import LocationItem from "@/components/location/LocationItem.vue";
-import { useLocation } from "@/composables/useLocation";
+import { useLocations } from "@/composables/useLocations";
 
-const { locations, getAllLocations } = useLocation();
-
-getAllLocations();
-
-
+const { locations } = useLocations();
 </script>
-

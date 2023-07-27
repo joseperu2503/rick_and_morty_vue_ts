@@ -1,16 +1,24 @@
 <template>
-  <div class="border-b border-rick-5 py-6 md:py-8 px-4 flex justify-between">
+  <div
+    class="backdrop-blur-sm bg-black/60 hover:bg-black/30 shadow-sm shadow-rick-2 rounded-lg py-4 px-4 flex flex-col justify-between transition-all cursor-pointer"
+    @click="goLocation()"
+  >
     <div
-      @click="goLocation()"
-      class="cursor-pointer text-white text-base sm:text-lg md:text-xl lg:text-2xl"
+      class="text-white text-base sm:text-lg md:text-xl lg:text-2xl"
     >
       {{ location.name }}
     </div>
-    <div class="text-rick-2" @click="goLocation()">
-      <img
-        src="@/assets/arrow-right.svg"
-        class="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 cursor-pointer"
-      />
+    <div class="flex mt-10 gap-4 items-center justify-start">
+      <div
+        class="bg-rick-3 px-2 py-1 rounded-md text-sky-900 text-xs font-semibold"
+      >
+        {{ location.dimension }}
+      </div>
+      <div
+        class="bg-rick-2 px-2 py-1 rounded-md text-sky-900 text-xs font-semibold"
+      >
+        {{ location.type }}
+      </div>
     </div>
   </div>
 </template>
