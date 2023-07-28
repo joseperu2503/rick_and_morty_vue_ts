@@ -14,6 +14,7 @@
       class="rounded-2xl w-full"
       @load="onImageLoad"
       @error="onImageError"
+      v-show="imageLoaded"
     />
     <div
       class="absolute bg-gradient-to-t from-black bottom-0 h-3/5 w-full px-4 flex items-end pb-4 rounded-2xl"

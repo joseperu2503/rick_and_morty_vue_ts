@@ -33,30 +33,18 @@
     ></div>
     <div
       class="fixed top-0 right-0 left-0 bottom-0 bg-black/70 z-10 backdrop-blur-sm transition-all"
-      :class="[sidebar ? 'translate-x-0' : 'translate-x-full']"
+      :class="[showSideBar ? 'translate-x-0' : 'translate-x-full']"
     >
       <div
         class="flex h-full flex-col items-center justify-center text-white text-xl sm:flex gap-4"
       >
-        <router-link
-          active-class="active"
-          to="/"
-          class="neon"
-          @click="toggleSidebar"
+        <router-link active-class="active" to="/" class="neon"
           >Home</router-link
         >
-        <router-link
-          active-class="active"
-          to="/characters"
-          class="neon"
-          @click="toggleSidebar"
+        <router-link active-class="active" to="/characters" class="neon"
           >Characters</router-link
         >
-        <router-link
-          active-class="active"
-          to="/locations"
-          class="neon"
-          @click="toggleSidebar"
+        <router-link active-class="active" to="/locations" class="neon"
           >Locations</router-link
         >
         <!-- <router-link active-class="active" to="/episodes" class="neon" @click="toggleSidebar">Episodes</router-link> -->
@@ -74,10 +62,14 @@
 <script lang="ts" setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
+import { useSidebarStore } from "@/stores/sidebar";
+import { storeToRefs } from "pinia";
 
 const router = useRouter();
 
-const sidebar = ref<boolean>(false);
+const sidebarStore = useSidebarStore();
+const { showSideBar } = storeToRefs(sidebarStore);
+
 const opacity = ref<number>(0);
 
 const goHome = () => {
@@ -85,7 +77,7 @@ const goHome = () => {
 };
 
 const toggleSidebar = () => {
-  sidebar.value = !sidebar.value;
+  showSideBar.value = !showSideBar.value;
 };
 
 onMounted(() => {
@@ -123,6 +115,6 @@ const scroll = () => {
 }
 
 .neon.active {
-  text-shadow: 0 0 5px #5CAD4A, 0 0 8px #5CAD4A, 0 0 13px #5CAD4A;
+  text-shadow: 0 0 5px #5cad4a, 0 0 8px #5cad4a, 0 0 13px #5cad4a;
 }
 </style>
