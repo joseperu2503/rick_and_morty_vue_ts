@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto">
     <InputSearch v-model="search" />
     <div
-      class="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-fit mx-auto"
+      class="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto"
     >
       <CharacterItem
         v-for="item in characters"
