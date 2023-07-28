@@ -123,6 +123,6 @@ const scroll = () => {
 }
 
 .neon.active {
-  text-shadow: 0 0 5px #35c9dd, 0 0 8px #35c9dd, 0 0 13px #35c9dd;
+  text-shadow: 0 0 5px #5CAD4A, 0 0 8px #5CAD4A, 0 0 13px #5CAD4A;
 }
 </style>

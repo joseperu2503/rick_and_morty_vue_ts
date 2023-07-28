@@ -4,7 +4,9 @@ import { Location } from "@/interfaces/location.interface";
 
 export const useLocationStore = defineStore("location", () => {
   const locations = ref<Location[]>([]);
-  const nextPageLocations = ref<string | null>("location?page=1");
+  const page = ref<number>(1);
+  const numPages = ref<number>(2);
+  const search = ref("");
 
-  return { locations, nextPageLocations };
+  return { locations, page, numPages, search };
 });

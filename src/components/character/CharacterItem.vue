@@ -7,7 +7,7 @@
     <div
       class="absolute bg-gradient-to-t from-black bottom-0 h-3/5 w-full px-4 flex items-end pb-4 rounded-2xl"
     >
-      <h2 class="text-2xl text-white">{{ character.name }}</h2>
+      <h2 class="text-xl md:text-2xl text-rick-white leading-1">{{ character.name }}</h2>
     </div>
   </div>
 </template>
