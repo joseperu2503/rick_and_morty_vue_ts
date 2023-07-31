@@ -1,28 +1,28 @@
 import { http } from "@/http/http.service";
 import { ref, onMounted, onBeforeUnmount, watch } from "vue";
-import { GetAllLocationsInterface } from "@/interfaces/location.interface.ts";
-import { useLocationStore } from "@/stores/location";
+import { GetAllEpisodesInterface } from "@/interfaces/episode.interface.ts";
+import { useEpisodeStore } from "@/stores/episode";
 import { storeToRefs } from "pinia";
 
-export function useLocations() {
-  const locationStore = useLocationStore();
+export function useEpisodes() {
+  const episodeStore = useEpisodeStore();
 
-  const { locations, page, numPages, search } = storeToRefs(locationStore);
+  const { episodes, page, numPages, search } = storeToRefs(episodeStore);
   const loadMore = ref(true);
 
-  const getAllLocations = () => {
+  const getAllEpisodes = () => {
     loadMore.value = false;
     let currentSearch: string = search.value;
     http
-      .get<GetAllLocationsInterface>(
-        `location?page=${page.value}&name=${currentSearch}`
+      .get<GetAllEpisodesInterface>(
+        `episode?page=${page.value}&name=${currentSearch}`
       )
       .then((response) => {
         if (search.value == currentSearch) {
           if (page.value == 1) {
-            locations.value = [];
+            episodes.value = [];
           }
-          locations.value.push(...response.data.results);
+          episodes.value.push(...response.data.results);
           numPages.value = response.data.info.pages;
           page.value++;
           loadMore.value = true;
@@ -31,29 +31,29 @@ export function useLocations() {
       .catch((error) => {
         console.log(error);
         if (search.value == currentSearch) {
-          locations.value = [];
+          episodes.value = [];
         }
       });
   };
 
-  const loadMoreLocations = () => {
+  const loadMoreEpisodes = () => {
     if (page.value <= numPages.value && verifyBottom() && loadMore.value) {
-      getAllLocations();
+      getAllEpisodes();
     }
   };
 
   if (search.value != "") {
     search.value = "";
     page.value = 1;
-    locations.value = [];
+    episodes.value = [];
   }
-  if (locations.value.length == 0) {
-    getAllLocations();
+  if (episodes.value.length == 0) {
+    getAllEpisodes();
   }
 
   watch(search, () => {
     page.value = 1;
-    getAllLocations();
+    getAllEpisodes();
   });
 
   const verifyBottom = () => {
@@ -72,18 +72,18 @@ export function useLocations() {
       body.scrollTop = 0;
     }
 
-    body?.addEventListener("scroll", loadMoreLocations);
+    body?.addEventListener("scroll", loadMoreEpisodes);
   });
 
   onBeforeUnmount(() => {
     document
       .getElementById("body")
-      ?.removeEventListener("scroll", loadMoreLocations);
+      ?.removeEventListener("scroll", loadMoreEpisodes);
   });
 
   return {
-    getAllLocations,
-    locations,
+    getAllEpisodes,
+    episodes,
     search,
   };
 }

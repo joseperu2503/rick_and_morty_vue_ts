@@ -1,4 +1,4 @@
-export interface GetAllLocartionsInterface {
+export interface GetAllLocationsInterface {
   info: Info;
   results: Location[];
 }

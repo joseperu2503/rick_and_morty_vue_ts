@@ -9,7 +9,7 @@
         <router-link active-class="active" to="/" class="neon">Home</router-link>
         <router-link active-class="active" to="/characters" class="neon">Characters</router-link>
         <router-link active-class="active" to="/locations" class="neon">Locations</router-link>
-        <!-- <router-link active-class="active" to="/episodes" class="neon">Episodes</router-link> -->
+        <router-link active-class="active" to="/episodes" class="neon">Episodes</router-link>
       </nav>
     </div>
     <div class="bg-black w-full h-20 fixed top-0 z-10" :style="`opacity: ${opacity};`"></div>
@@ -19,7 +19,7 @@
         <router-link active-class="active" to="/" class="neon">Home</router-link>
         <router-link active-class="active" to="/characters" class="neon">Characters</router-link>
         <router-link active-class="active" to="/locations" class="neon">Locations</router-link>
-        <!-- <router-link active-class="active" to="/episodes" class="neon" @click="toggleSidebar">Episodes</router-link> -->
+        <router-link active-class="active" to="/episodes" class="neon" @click="toggleSidebar">Episodes</router-link>
       </div>
     </div>
   </div>

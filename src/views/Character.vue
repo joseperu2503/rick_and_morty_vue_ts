@@ -69,13 +69,13 @@ const characterId: string = route.params.characterId as string;
 const { character, getCharacter, showCharacter } = useCharacter();
 getCharacter(characterId);
 
-const getLocartionId = () => {
+const getLocationId = () => {
   let array = character.value.location.url.split("/");
   return array[array.length - 1];
 };
 
 const goLocation = () => {
-  let locationId = getLocartionId();
+  let locationId = getLocationId();
   router.push({
     name: "location",
     params: { locationId: locationId },

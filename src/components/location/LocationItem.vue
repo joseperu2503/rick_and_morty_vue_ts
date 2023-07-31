@@ -15,7 +15,7 @@
         {{ location.dimension }}
       </div>
       <div
-        class="bg-rick-2 px-2 py-1 rounded-md text-sky-900 text-xs font-semibold"
+        class="bg-rick-green-2 px-2 py-1 rounded-md text-rick-white text-xs font-semibold"
       >
         {{ location.type }}
       </div>
