@@ -13,7 +13,7 @@
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-fit mx-auto">
-      <CharacterItem v-for="item in residents" :key="item.id" :character="item" />
+      <CharacterItem v-for="item in characters" :key="item.id" :character="item" />
     </div>
   </div>
 </template>
@@ -22,12 +22,11 @@ import CharacterItem from "@/components/character/CharacterItem.vue";
 import { useLocation } from "@/composables/useLocation";
 import { useRoute } from "vue-router";
 
-
 const route = useRoute();
 
 const locationId = route.params.locationId as string;
 
-const { location, getLocation, residents } = useLocation();
+const { location, getLocation, characters } = useLocation();
 getLocation(locationId);
 
 </script>

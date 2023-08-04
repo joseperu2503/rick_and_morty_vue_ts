@@ -1,14 +1,11 @@
 import { http } from "@/http/http.service";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { Location, initLocation } from "@/interfaces/location.interface.ts";
-
-import { Character } from "@/interfaces/character.interface.ts";
 
 import { useSomeCharacters } from "@/composables/useSomeCharacters";
 
 export function useLocation() {
   const location = ref<Location>(initLocation);
-  const residents = ref<Character[]>();
 
   const { characters, getSomeCharacters } = useSomeCharacters();
 
@@ -36,13 +33,9 @@ export function useLocation() {
       });
   };
 
-  watch(characters, () => {
-    residents.value = characters.value;
-  });
-
   return {
     getLocation,
     location,
-    residents,
+    characters,
   };
 }
