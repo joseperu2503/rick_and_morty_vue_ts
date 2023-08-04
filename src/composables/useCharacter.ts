@@ -1,6 +1,7 @@
 import { http } from "@/http/http.service";
 import { ref } from "vue";
 import { Character, initCharacter } from "@/interfaces/character.interface.ts";
+import { useEpisode } from "@/composables/useEpisode";
 
 export function useCharacter() {
   const characters = ref<Character[]>([]);
@@ -22,6 +23,7 @@ export function useCharacter() {
 
   const character = ref<Character>(initCharacter);
   const showCharacter = ref<boolean>(false);
+  const { episodes, getSomeEpisodes } = useEpisode();
 
   const getCharacter = (characterId: string) => {
     http
@@ -29,6 +31,19 @@ export function useCharacter() {
       .then((response) => {
         character.value = response.data;
         showCharacter.value = true;
+
+        let episodesId: string[] = [];
+
+        character.value.episode.map((url) => {
+          const parts = url.split("/");
+          const id = parts[parts.length - 1];
+          episodesId.push(id);
+        });
+
+        if (episodesId.length > 0) {
+          let someEpisodes = episodesId.join(",");
+          getSomeEpisodes(someEpisodes);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -41,5 +56,6 @@ export function useCharacter() {
     getCharacter,
     character,
     showCharacter,
+    episodes
   };
 }

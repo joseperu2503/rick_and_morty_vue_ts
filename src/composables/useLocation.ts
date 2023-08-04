@@ -25,7 +25,7 @@ export function useLocation() {
           const id = parts[parts.length - 1];
           residentsId.push(id);
         });
-        // console.log('residentsId',this.residentsId)
+
         if (residentsId.length > 0) {
           let someCharacters = residentsId.join(",");
           getSomeCharacters(someCharacters);
