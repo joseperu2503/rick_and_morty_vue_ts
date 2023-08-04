@@ -68,16 +68,5 @@ const scroll = () => {
 </script>
 
 <style scoped>
-.neon {
-  transition: 0.2s;
-}
 
-.neon:hover {
-  transform: scale(105%);
-}
-
-.neon.active {
-  text-shadow: 0 0 5px #5cad4a, 0 0 8px #5cad4a, 0 0 13px #5cad4a;
-}
 </style>
-@/stores/appbar

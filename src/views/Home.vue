@@ -1,17 +1,29 @@
 <template>
-  <div class="fixed top-0 right-0 left-0 bottom-0 flex flex-col justify-center">
-    <Slider :characters="characters" />
+  <div class="fixed top-0 right-0 left-0 bottom-0 overflow-auto">
+    <div class="min-h-[400px] h-full flex flex-col justify-center pt-10">
+      <Slider :characters="characters" />
 
-    <div class="flex justify-center mt-16">
-      <Button @click="enter" />
+      <div class="flex flex-col items-center justify-center mt-16">
+        <div class="h-10 flex items-end">
+          <div class="text-rick-white text-3xl font-semibold active cursor-pointer flex overflow-hidden justify-center"
+            @click="enter" :class="[showPortal ? 'neon' : 'opacity-0']">
+            <p class="hover:scale-105 transition-all">Enter</p>
+          </div>
+
+        </div>
+        <div class="h-8">
+          <img src="@/assets/portal-rick-and-morty.gif" alt="" class="transition-all duration-500"
+            :class="[showPortal ? 'h-8 w-40' : 'h-0 w-0']">
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import Slider from "@/components/home/Slider.vue";
-import Button from "@/components/home/Button.vue";
 import { useSomeCharacters } from "@/composables/useSomeCharacters";
 import { useRouter } from "vue-router";
+import { ref } from 'vue'
 const router = useRouter();
 
 const { characters, getSomeCharacters } = useSomeCharacters();
@@ -21,4 +33,32 @@ getSomeCharacters("1,2,3,4,5");
 const enter = () => {
   router.push({ name: "characters" });
 };
+
+const showPortal = ref(false)
+setTimeout(() => {
+  showPortal.value = true
+}, 500);
 </script>
+<style scoped>
+.neon {
+  animation: enterAnimation 1s ease-in-out forwards;
+}
+
+@keyframes enterAnimation {
+  /* 0% es el estado inicial de la animación */
+  0% {
+    transform: translateY(36px);
+    height: 0;
+    opacity: 0;
+    width: 0;
+  }
+
+  /* 100% es el estado final de la animación */
+  100% {
+    transform: translateY(-16px);
+    height: 40px;
+    opacity: 1;
+    width: 200px;
+  }
+}
+</style>
