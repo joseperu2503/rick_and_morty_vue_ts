@@ -1,29 +1,13 @@
 import { http } from "@/http/http.service";
 import { ref } from "vue";
 import { Character, initCharacter } from "@/interfaces/character.interface.ts";
-import { useEpisode } from "@/composables/useEpisode";
+import { useSomeEpisodes } from "@/composables/useSomeEpisodes";
 
 export function useCharacter() {
-  const characters = ref<Character[]>([]);
-
-  const getSomeCharacters = (caracters: string) => {
-    http
-      .get<Character | Character[]>(`character/${caracters}`)
-      .then((response) => {
-        if (Array.isArray(response.data)) {
-          characters.value = response.data;
-        } else {
-          characters.value = [response.data];
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   const character = ref<Character>(initCharacter);
   const showCharacter = ref<boolean>(false);
-  const { episodes, getSomeEpisodes } = useEpisode();
+  const { episodes, getSomeEpisodes } = useSomeEpisodes();
 
   const getCharacter = (characterId: string) => {
     http
@@ -51,8 +35,6 @@ export function useCharacter() {
   };
 
   return {
-    characters,
-    getSomeCharacters,
     getCharacter,
     character,
     showCharacter,

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-3 max-w-7xl mx-auto justify-center h-1/2">
+  <div class="flex gap-3 max-w-7xl mx-auto justify-center h-1/3 md:h-1/2">
     <div
       v-for="(item, i) in characters"
       :key="item.id"
@@ -16,7 +16,7 @@
         class="absolute from-black h-1/3 w-full bottom-0 bg-gradient-to-t flex items-end px-4 pb-4 rounded-b-3xl overflow-x-hidden"
       >
         <div
-          class="w-min sm:min-w-max text-base sm:text-lg md:text-xl lg:text-3xl font-semibold text-white"
+          class="w-min sm:min-w-max text-base sm:text-lg md:text-xl lg:text-3xl font-semibold text-white leading-none"
         >
           {{ item.name }}
         </div>

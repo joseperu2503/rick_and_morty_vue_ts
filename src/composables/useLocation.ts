@@ -4,13 +4,13 @@ import { Location, initLocation } from "@/interfaces/location.interface.ts";
 
 import { Character } from "@/interfaces/character.interface.ts";
 
-import { useCharacter } from "@/composables/useCharacter";
+import { useSomeCharacters } from "@/composables/useSomeCharacters";
 
 export function useLocation() {
   const location = ref<Location>(initLocation);
   const residents = ref<Character[]>();
 
-  const { characters, getSomeCharacters } = useCharacter();
+  const { characters, getSomeCharacters } = useSomeCharacters();
 
   const getLocation = (locationId: string) => {
     http

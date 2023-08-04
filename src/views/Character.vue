@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto">
+  <div class="max-w-5xl mx-auto">
     <div class="flex flex-col md:flex-row gap-2 md:gap-12 lg:24 justify-center">
       <div class="flex items-center justify-center">
         <img :src="character.image"

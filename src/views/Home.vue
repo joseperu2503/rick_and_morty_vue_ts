@@ -10,11 +10,11 @@
 <script lang="ts" setup>
 import Slider from "@/components/home/Slider.vue";
 import Button from "@/components/home/Button.vue";
-import { useCharacter } from "@/composables/useCharacter";
+import { useSomeCharacters } from "@/composables/useSomeCharacters";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
-const { characters, getSomeCharacters } = useCharacter();
+const { characters, getSomeCharacters } = useSomeCharacters();
 
 getSomeCharacters("1,2,3,4,5");
 

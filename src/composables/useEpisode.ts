@@ -1,18 +1,32 @@
 import { http } from "@/http/http.service";
 import { ref } from "vue";
-import { Episode } from "@/interfaces/episode.interface.ts";
+import { Episode, initEpisode } from "@/interfaces/episode.interface.ts";
+import { useSomeCharacters } from "@/composables/useSomeCharacters";
 
 export function useEpisode() {
-  const episodes = ref<Episode[]>([]);
 
-  const getSomeEpisodes = (caracters: string) => {
+  const episode = ref<Episode>(initEpisode);
+  const showEpisode = ref<boolean>(false);
+  const { characters, getSomeCharacters } = useSomeCharacters();
+
+  const getEpisode = (episodeId: string) => {
     http
-      .get<Episode | Episode[]>(`episode/${caracters}`)
+      .get<Episode>(`episode/${episodeId}`)
       .then((response) => {
-        if (Array.isArray(response.data)) {
-          episodes.value = response.data;
-        } else {
-          episodes.value = [response.data];
+        episode.value = response.data;
+        showEpisode.value = true;
+
+        let charactersId: string[] = [];
+
+        episode.value.characters.map((url) => {
+          const parts = url.split("/");
+          const id = parts[parts.length - 1];
+          charactersId.push(id);
+        });
+
+        if (charactersId.length > 0) {
+          let someCharaters = charactersId.join(",");
+          getSomeCharacters(someCharaters);
         }
       })
       .catch((error) => {
@@ -21,7 +35,9 @@ export function useEpisode() {
   };
 
   return {
-    episodes,
-    getSomeEpisodes
+    getEpisode,
+    episode,
+    showEpisode,
+    characters
   };
 }
