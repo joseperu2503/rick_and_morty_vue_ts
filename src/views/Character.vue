@@ -46,8 +46,8 @@
       <div class="flex justify-center items-center gap-4">
         <div class="bg-gray-500 h-[0.1px] flex-1"></div>
         <div class="text-rick-white flex items-center gap-3 justify-center">
-          <Icon icon="solar:tv-line-duotone" class="h-8 w-auto" />
-          <div class="text-xl sm:text-2xl lg:text-3xl">Episodes</div>
+          <Icon icon="solar:tv-line-duotone" class="h-6 md:h-8 w-auto" />
+          <div class="text-lg sm:text-xl lg:text-2xl">Episodes</div>
         </div>
         <div class="bg-gray-500 h-[0.1px] flex-1"></div>
       </div>
