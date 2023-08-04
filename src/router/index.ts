@@ -1,4 +1,4 @@
-import { useSidebarStore } from "@/stores/sidebar";
+import { useAppbarStore } from "@/stores/appbar";
 import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -39,8 +39,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async () => {
-  const sidebarStore = useSidebarStore();
-  const { showSideBar } = storeToRefs(sidebarStore);
+  const appBar = useAppbarStore();
+  const { showSideBar } = storeToRefs(appBar);
   showSideBar.value = false;
 });
 

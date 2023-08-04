@@ -1,8 +1,9 @@
 import { http } from "@/http/http.service";
-import { ref, onMounted, onBeforeUnmount, watch } from "vue";
+import { ref, watch } from "vue";
 import { GetAllLocationsInterface } from "@/interfaces/location.interface.ts";
 import { useLocationStore } from "@/stores/location";
 import { storeToRefs } from "pinia";
+import { useScroll } from "@/composables//useScroll";
 
 export function useLocations() {
   const locationStore = useLocationStore();
@@ -37,7 +38,7 @@ export function useLocations() {
   };
 
   const loadMoreLocations = () => {
-    if (page.value <= numPages.value && verifyBottom() && loadMore.value) {
+    if (page.value <= numPages.value && loadMore.value) {
       getAllLocations();
     }
   };
@@ -56,30 +57,7 @@ export function useLocations() {
     getAllLocations();
   });
 
-  const verifyBottom = () => {
-    const scrollY = document.getElementById("body")?.scrollTop || 0; // Obtener la posición actual del scroll vertical
-    const alturaTotal = document.getElementById("body")?.scrollHeight || 0; // Altura total del contenido de la página
-    const alturaVentana = window.innerHeight; // Altura visible del navegador
-
-    // Si la suma de la posición actual del scroll y la altura visible del navegador es mayor o igual a la altura total,
-    // entonces hemos alcanzado el tope de abajo
-    return scrollY + alturaVentana >= alturaTotal - 500;
-  };
-
-  onMounted(() => {
-    let body = document.getElementById("body");
-    if (body) {
-      body.scrollTop = 0;
-    }
-
-    body?.addEventListener("scroll", loadMoreLocations);
-  });
-
-  onBeforeUnmount(() => {
-    document
-      .getElementById("body")
-      ?.removeEventListener("scroll", loadMoreLocations);
-  });
+  useScroll(loadMoreLocations)
 
   return {
     getAllLocations,

@@ -26,17 +26,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
-import { useSidebarStore } from "@/stores/sidebar";
+import { useAppbarStore } from "@/stores/appbar";
+import { useScrollStore } from "@/stores/scroll";
 import { storeToRefs } from "pinia";
 
 const router = useRouter();
 
-const sidebarStore = useSidebarStore();
-const { showSideBar } = storeToRefs(sidebarStore);
+const appbarStore = useAppbarStore();
+const scrollStore = useScrollStore();
 
-const opacity = ref<number>(0);
+const { showSideBar, opacity } = storeToRefs(appbarStore);
+const { body } = storeToRefs(scrollStore);
 
 const goHome = () => {
   router.push("/");
@@ -48,15 +50,15 @@ const toggleSidebar = () => {
 
 onMounted(() => {
   scroll();
-  document.getElementById("body")?.addEventListener("scroll", scroll);
+  body.value?.addEventListener("scroll", scroll);
 });
 
 onBeforeUnmount(() => {
-  document.getElementById("body")?.removeEventListener("scroll", scroll);
+  body.value?.removeEventListener("scroll", scroll);
 });
 
 const scroll = () => {
-  let scroll = document.getElementById("body")?.scrollTop;
+  let scroll = body.value?.scrollTop;
   if (scroll != undefined && scroll <= 180) {
     opacity.value = scroll / 180;
   } else {
@@ -78,3 +80,4 @@ const scroll = () => {
   text-shadow: 0 0 5px #5cad4a, 0 0 8px #5cad4a, 0 0 13px #5cad4a;
 }
 </style>
+@/stores/appbar
