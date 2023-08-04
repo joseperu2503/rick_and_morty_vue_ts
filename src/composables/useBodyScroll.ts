@@ -8,6 +8,5 @@ export function useBodyScroll() {
 
   onMounted(() => {
     body.value = document.getElementById("body");
-    console.log(body.value)
   });
 }

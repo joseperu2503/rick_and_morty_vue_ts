@@ -1,6 +1,8 @@
 <template>
-  <div class="fixed top-0 bottom-0 left-0 right-0 overflow-y-auto px-8 fondo pt-32 md:pt-40 pb-16 md:pb-36 z-0 bg-[#181c2b]" id="body">
-    <AppHeader/>
+  <div
+    class="fixed top-0 bottom-0 left-0 right-0 overflow-y-auto px-8 fondo pt-32 md:pt-40 pb-16 md:pb-36 z-0 bg-[#181c2b]"
+    id="body">
+    <AppHeader />
 
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in">
@@ -10,9 +12,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import AppHeader from '@/components/shared/AppHeader.vue';
 import { useBodyScroll } from "@/composables/useBodyScroll";
-
+import { defineAsyncComponent } from "vue";
+const AppHeader = defineAsyncComponent(() => import("@/components/shared/AppHeader.vue"))
 useBodyScroll()
 </script>
 
@@ -57,4 +59,3 @@ useBodyScroll()
   }
 }
 </style>
-@/composables/useBodyScroll

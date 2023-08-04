@@ -14,31 +14,28 @@
             {{ character.name }}
           </h1>
           <div
-            class="w-full backdrop-blur-sm bg-black/50 shadow-sm shadow-rick-green-1 rounded-lg py-4 px-8 flex flex-col gap-2 justify-between">
+            class="w-full max-w-xl backdrop-blur-sm bg-black/50 shadow-sm shadow-rick-green-1 rounded-lg py-4 px-8 flex flex-col gap-2 justify-between">
             <div class="flex gap-4 justify-between items-center">
-              <span class="text-rick-3 w-20">GENDER</span>
-              <hr class="w-full border-gray-600 h-[0.5px]"/>
-              <span class="text-white"> {{ character.gender }}</span>
+              <span class="text-rick-3 text-sm sm:text-base">GENDER</span>
+              <span class="text-white text-sm sm:text-base text-right"> {{ character.gender }}</span>
             </div>
             <div class="flex gap-4 justify-between items-center">
-              <span class="text-rick-3 w-20">SPECIE</span>
-              <hr class="w-full border-gray-600 h-[0.5px]"/>
-              <span class="text-white"> {{ character.species }}</span>
+              <span class="text-rick-3 text-sm sm:text-base">SPECIE</span>
+              <span class="text-white text-sm sm:text-base text-right"> {{ character.species }}</span>
             </div>
             <div class="flex gap-4 justify-between items-center">
-              <span class="text-rick-3 w-20">STATUS</span>
-              <hr class="w-full border-gray-600 h-[0.5px]"/>
-              <span class="text-white"> {{ character.status }}</span>
+              <span class="text-rick-3 text-sm sm:text-base">STATUS</span>
+              <span class="text-white text-sm sm:text-base text-right"> {{ character.status }}</span>
             </div>
             <div class="flex gap-4 justify-between items-center">
-              <span class="text-rick-3 w-20">ORIGIN</span>
-              <hr class="w-full border-gray-600 h-[0.5px]"/>
-              <span class="text-white"> {{ character.origin?.name }}</span>
+              <span class="text-rick-3 text-sm sm:text-base">ORIGIN</span>
+              <span class="text-white text-sm sm:text-base text-right"> {{ character.origin?.name }}</span>
             </div>
             <div class="flex gap-4 justify-between items-center" @click="goLocation()">
-              <span class="text-rick-3 w-20 cursor-pointer hover:underline">LOCATION</span>
-              <hr class="w-full border-gray-600 h-[0.5px]"/>
-              <span class="text-white cursor-pointer hover:underline"> {{ character.location?.name }}</span>
+              <span class="text-rick-3 text-sm sm:text-base cursor-pointer hover:underline">LOCATION</span>
+              <div class="text-white text-sm sm:text-base text-right cursor-pointer hover:underline">
+                {{ character.location?.name }}
+              </div>
             </div>
           </div>
         </div>
@@ -54,7 +51,7 @@
         </div>
         <div class="bg-gray-500 h-[0.1px] flex-1"></div>
       </div>
-      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="mt-10 md:mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <EpisodeItem v-for="item in episodes" :key="item.id" :episode="item" />
       </div>
     </div>
