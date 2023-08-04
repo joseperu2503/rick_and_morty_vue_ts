@@ -2,7 +2,8 @@
   <div class="max-w-7xl mx-auto">
     <div class="flex flex-col md:flex-row gap-2 md:gap-12 lg:24 justify-center">
       <div class="flex items-center justify-center">
-        <img :src="character.image" class="w-full max-w-xs md:w-72 rounded-md opacity-0 transition-all duration-700 scale-0"
+        <img :src="character.image"
+          class="w-full max-w-xs md:w-72 rounded-md opacity-0 transition-all duration-700 scale-0"
           :class="{ 'opacity-100 scale-100': showCharacter }" />
       </div>
 
