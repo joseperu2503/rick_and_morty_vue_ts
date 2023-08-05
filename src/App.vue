@@ -1,14 +1,14 @@
 <template>
-  <div
-    class="fixed top-0 bottom-0 left-0 right-0 overflow-y-auto px-4 sm:px-8 fondo pt-32 md:pt-40 pb-16 md:pb-36 z-0"
-    id="body">
-    <AppHeader />
+  <div class="fixed top-0 bottom-0 left-0 right-0 overflow-y-auto px-4 sm:px-8 fondo z-0" id="body">
 
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <AppHeader />
+    <div class="pt-32 md:pt-40 pb-16 md:pb-36">
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>

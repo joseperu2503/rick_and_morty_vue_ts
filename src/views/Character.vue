@@ -2,9 +2,12 @@
   <div class="max-w-5xl mx-auto">
     <div class="flex flex-col md:flex-row gap-2 md:gap-12 lg:24 justify-center">
       <div class="flex items-center justify-center">
+        <img src="@/assets/avatar_default.jpeg" class="rounded-2xl w-full"
+          v-if="imageError || (!imageLoaded && !imageError)" />
         <img :src="character.image"
           class="w-full max-w-xs md:w-72 rounded-md opacity-0 transition-all duration-700 scale-0"
-          :class="{ 'opacity-100 scale-100': showCharacter }" />
+          :class="{ 'opacity-100 scale-100': showCharacter }" @load="onImageLoad" @error="onImageError"
+          v-show="imageLoaded" />
       </div>
 
       <div class="mx-auto md:mx-0 w-full max-w-2xl">
@@ -59,6 +62,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { useRouter, useRoute } from "vue-router";
 import { useCharacter } from "@/composables/useCharacter";
 import EpisodeItem from "@/components/episode/EpisodeItem.vue";
@@ -82,5 +86,17 @@ const goLocation = () => {
     name: "location",
     params: { locationId: locationId },
   });
+};
+
+const imageLoaded = ref(false);
+const imageError = ref(false);
+
+const onImageLoad = () => {
+  imageLoaded.value = true;
+  imageError.value = false;
+};
+
+const onImageError = () => {
+  imageError.value = true;
 };
 </script>

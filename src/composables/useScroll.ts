@@ -2,7 +2,7 @@ import { onBeforeUnmount, onMounted } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { storeToRefs } from "pinia";
 
-export function useScroll(callback: () => void) {
+export function useScroll(callback: () => void = () => {}) {
   const scrollStore = useScrollStore();
   const { body } = storeToRefs(scrollStore);
 

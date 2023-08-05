@@ -1,8 +1,8 @@
 <template>
   <div class="fixed top-0 right-0 left-0 z-10">
-    <div class="h-28 pb-12 w-full bg-gradient-to-b from-black fixed z-20 top-0 px-8 flex items-center justify-between">
+    <div class="h-16 w-full bg-gradient-to-b from-black fixed z-20 top-0 px-8 flex items-center justify-between">
       <div>
-        <img src="@/assets/logo.png" class="h-8 md:h-10 cursor-pointer" @click="goHome" />
+        <img src="@/assets/logo.png" class="h-10 cursor-pointer" @click="goHome" />
       </div>
       <i class="fas fa-bars text-white text-2xl sm:hidden" @click="toggleSidebar"></i>
       <nav class="hidden text-white text-md sm:flex gap-4 md:gap-8">
