@@ -16,7 +16,7 @@ export function useCharacters() {
     let currentSearch: string = search.value;
     http
       .get<GetAllCharactersInterface>(
-        `character?page=${page.value}&name=${search.value}`
+        `character?page=${page.value}&name=${currentSearch}`
       )
       .then((response) => {
         if (search.value == currentSearch) {

@@ -5,9 +5,9 @@ import { Character } from "@/interfaces/character.interface.ts";
 export function useSomeCharacters() {
   const characters = ref<Character[]>([]);
 
-  const getSomeCharacters = (caracters: string) => {
+  const getSomeCharacters = (someCharacters: string) => {
     http
-      .get<Character | Character[]>(`character/${caracters}`)
+      .get<Character | Character[]>(`character/${someCharacters}`)
       .then((response) => {
         if (Array.isArray(response.data)) {
           characters.value = response.data;

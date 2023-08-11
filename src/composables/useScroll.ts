@@ -15,7 +15,7 @@ export function useScroll(callback: () => void = () => {}) {
   });
 
   onBeforeUnmount(() => {
-    body.value?.addEventListener("scroll", scrollEvent);
+    body.value?.removeEventListener("scroll", scrollEvent);
   });
 
   const scrollEvent = () => {

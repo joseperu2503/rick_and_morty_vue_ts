@@ -15,16 +15,16 @@ export function useLocation() {
       .then((response) => {
         location.value = response.data;
 
-        let residentsId: string[] = [];
+        let charactersId: string[] = [];
 
         location.value.residents.map((url) => {
           const parts = url.split("/");
           const id = parts[parts.length - 1];
-          residentsId.push(id);
+          charactersId.push(id);
         });
 
-        if (residentsId.length > 0) {
-          let someCharacters = residentsId.join(",");
+        if (charactersId.length > 0) {
+          let someCharacters = charactersId.join(",");
           getSomeCharacters(someCharacters);
         }
       })
