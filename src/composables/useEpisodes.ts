@@ -3,7 +3,7 @@ import { ref, watch } from "vue";
 import { GetAllEpisodesInterface } from "@/interfaces/episode.interface.ts";
 import { useEpisodeStore } from "@/stores/episode";
 import { storeToRefs } from "pinia";
-import { useScroll } from "@/composables//useScroll";
+import { useScroll } from "@/composables/useScroll";
 
 export function useEpisodes() {
   const episodeStore = useEpisodeStore();

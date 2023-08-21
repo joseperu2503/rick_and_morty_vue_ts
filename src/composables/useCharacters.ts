@@ -3,7 +3,7 @@ import { GetAllCharactersInterface } from "@/interfaces/character.interface.ts";
 import { useCharacterStore } from "@/stores/character";
 import { storeToRefs } from "pinia";
 import { ref, watch } from "vue";
-import { useScroll } from "@/composables//useScroll";
+import { useScroll } from "@/composables/useScroll";
 
 export function useCharacters() {
   const characterStore = useCharacterStore();

@@ -3,7 +3,7 @@ import { ref, watch } from "vue";
 import { GetAllLocationsInterface } from "@/interfaces/location.interface.ts";
 import { useLocationStore } from "@/stores/location";
 import { storeToRefs } from "pinia";
-import { useScroll } from "@/composables//useScroll";
+import { useScroll } from "@/composables/useScroll";
 
 export function useLocations() {
   const locationStore = useLocationStore();

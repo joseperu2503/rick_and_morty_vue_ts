@@ -2,7 +2,7 @@ import { http } from "@/http/http.service";
 import { ref } from "vue";
 import { Character, initCharacter } from "@/interfaces/character.interface.ts";
 import { useSomeEpisodes } from "@/composables/useSomeEpisodes";
-import { useScroll } from "@/composables//useScroll";
+import { useScroll } from "@/composables/useScroll";
 
 export function useCharacter() {
 
