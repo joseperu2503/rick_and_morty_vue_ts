@@ -45,23 +45,24 @@
 import Input from './Input.vue';
 import Button from './Button.vue';
 import { onClickOutside } from '@vueuse/core'
-import { ref, watch } from 'vue';
-import { useLogin } from '@/composables/useLogin'
-import { useRegister } from '@/composables/useRegister'
+import { ref } from 'vue';
 import { useAuthModal } from '@/composables/useAuthModal'
 
 const target = ref(null)
 
-const { login, loginForm, loginErrors, resetLoginForm } = useLogin()
-const { register, registerForm, registerErrors, resetRegisterForm } = useRegister()
-const { closeAuthModal, form, toggleForm, showAuthModal } = useAuthModal()
+const {
+  closeAuthModal,
+  form,
+  toggleForm,
+  showAuthModal,
+  login,
+  loginForm,
+  loginErrors,
+  register,
+  registerForm,
+  registerErrors
+} = useAuthModal()
 
 onClickOutside(target, closeAuthModal)
-
-watch(showAuthModal, () => {
-  resetLoginForm()
-  resetRegisterForm()
-  form.value = 'login'
-})
 
 </script>
