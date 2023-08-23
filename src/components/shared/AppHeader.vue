@@ -9,10 +9,10 @@
         <router-link active-class="active" :to="link.url" class="neon leading-none" v-for="link in links">
           {{ link.label }}
         </router-link>
-        <Button type="outline"
-          @click="showAuthModal = !showAuthModal">
+        <Button type="outline" @click="showAuthModal = !showAuthModal" v-if="!user">
           Login
         </Button>
+        <AuthMenu v-else/>
       </nav>
     </div>
     <div class="bg-black w-full h-16 fixed top-0 z-10" :style="`opacity: ${opacity};`"></div>
@@ -37,6 +37,7 @@ import { storeToRefs } from "pinia";
 import { useAuthStore } from '@/stores/auth'
 import AuthModal from "@/components/shared/AuthModal.vue";
 import Button from '@/components/shared/Button.vue';
+import AuthMenu from "@/components/shared/AuthMenu.vue";
 
 const links = ref([
   { url: '/', label: 'Home' },
@@ -79,8 +80,9 @@ const scroll = () => {
   }
 };
 
+
 const authStore = useAuthStore()
-const { showAuthModal } = storeToRefs(authStore);
+const { showAuthModal, user } = storeToRefs(authStore);
 
 </script>
 

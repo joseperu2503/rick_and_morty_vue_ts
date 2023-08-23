@@ -1,3 +1,4 @@
+import { useAuth } from "@/composables/useAuth";
 import { useAppbarStore } from "@/stores/appbar";
 import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
@@ -45,8 +46,11 @@ const router = createRouter({
 
 router.beforeEach(async () => {
   const appBar = useAppbarStore();
+  const auth = useAuth();
+
   const { showSideBar } = storeToRefs(appBar);
   showSideBar.value = false;
+  auth.verifyAuth()
 });
 
 export default router;
