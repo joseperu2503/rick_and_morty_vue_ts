@@ -2,26 +2,24 @@
 import { authApi } from '@/http/authApi'
 import { useToken } from '@/composables/useToken'
 import { ref } from "vue";
-import { LoginError, LoginForm } from '@/interfaces/login.interface';
+import { LoginErrors, LoginForm, initLoginForm } from '@/interfaces/login.interface';
 import { useAuth } from './useAuth';
-import { useAuthStore } from '@/stores/auth';
-import { storeToRefs } from 'pinia';
+import { useAuthModal } from './useAuthModal';
 
 export function useLogin() {
   const tokenService = useToken()
   const auth = useAuth();
 
-  const errors = ref<LoginError>({});
-
+  const loginErrors = ref<LoginErrors>({});
   const loading = ref(false);
   const showPassword = ref(false);
-
-  const loginForm = ref<LoginForm>({
-    email: "",
-    password: "",
-  });
-
+  const loginForm = ref<LoginForm>({ ...initLoginForm });
   const remember = ref(true);
+
+  const resetLoginForm = () => {
+    loginForm.value = { ...initLoginForm }
+    loginErrors.value = {}
+  }
 
   const login = async () => {
     loading.value = true
@@ -29,35 +27,26 @@ export function useLogin() {
       let response = await authApi.post("/login", loginForm.value)
       tokenService.saveToken(response.data.access_token)
       auth.verifyAuth()
-      close()
+      console.log('initLoginForm', initLoginForm)
+      resetLoginForm()
+      closeAuthModal()
     } catch (error: any) {
       if (error.response.status === 422) {
-        errors.value = error.response.data.errors;
+        loginErrors.value = error.response.data.errors;
       }
     }
     loading.value = false
   }
 
-  const authStore = useAuthStore()
-  const { showAuthModal } = storeToRefs(authStore);
-
-  const close = () => {
-    showAuthModal.value = false
-    loginForm.value = {
-      email: "",
-      password: "",
-    }
-    errors.value = {}
-  }
+  const { closeAuthModal } = useAuthModal()
 
   return {
     login,
-    errors,
+    loginErrors,
     loading,
     loginForm,
     remember,
     showPassword,
-    close,
-    showAuthModal
+    resetLoginForm
   }
 }

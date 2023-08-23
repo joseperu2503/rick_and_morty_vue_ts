@@ -3,7 +3,12 @@ export interface LoginForm {
   password: string;
 }
 
-export interface LoginError {
+export interface LoginErrors {
   email?: string[];
   password?: string[];
+}
+
+export const initLoginForm: LoginForm = {
+  email: '',
+  password: ''
 }
