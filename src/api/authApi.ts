@@ -1,7 +1,7 @@
 import { useToken } from '@/composables/useToken';
 import axios from 'axios';
 
-const apiUrl = process.env.VUE_AUTH_API_URL
+const apiUrl = process.env.AUTH_API_URL
 const token = useToken()
 
 const authApi = axios.create({
@@ -17,4 +17,4 @@ authApi.interceptors.request.use((request) => {
   return request;
 });
 
-export {authApi, apiUrl};
+export { authApi };

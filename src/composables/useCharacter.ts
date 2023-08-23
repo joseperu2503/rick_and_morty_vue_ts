@@ -1,4 +1,4 @@
-import { http } from "@/http/http.service";
+import { rickAndMortyApi } from "@/api/rickAndMortyApi";
 import { ref } from "vue";
 import { Character, initCharacter } from "@/interfaces/character.interface.ts";
 import { useSomeEpisodes } from "@/composables/useSomeEpisodes";
@@ -11,7 +11,7 @@ export function useCharacter() {
   const { episodes, getSomeEpisodes } = useSomeEpisodes();
 
   const getCharacter = (characterId: string) => {
-    http
+    rickAndMortyApi
       .get<Character>(`character/${characterId}`)
       .then((response) => {
         character.value = response.data;

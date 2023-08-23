@@ -1,4 +1,4 @@
-import { http } from "@/http/http.service";
+import { rickAndMortyApi } from "@/api/rickAndMortyApi";
 import { ref } from "vue";
 import { Location, initLocation } from "@/interfaces/location.interface.ts";
 
@@ -10,7 +10,7 @@ export function useLocation() {
   const { characters, getSomeCharacters } = useSomeCharacters();
 
   const getLocation = (locationId: string) => {
-    http
+    rickAndMortyApi
       .get<Location>(`location/${locationId}`)
       .then((response) => {
         location.value = response.data;

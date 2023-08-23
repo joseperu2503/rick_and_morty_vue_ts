@@ -5,7 +5,7 @@ import { ref } from 'vue';
 import { useToken } from '@/composables/useToken'
 import { useAuth } from '@/composables/useAuth';
 import { LoginErrors, LoginForm, initLoginForm } from '@/interfaces/login.interface';
-import { authApi } from '@/http/authApi';
+import { authApi } from '@/api/authApi';
 import { RegisterErrors, RegisterForm, initRegisterForm } from '@/interfaces/register.interface';
 
 export function useAuthModal() {

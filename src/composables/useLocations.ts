@@ -1,4 +1,4 @@
-import { http } from "@/http/http.service";
+import { rickAndMortyApi } from "@/api/rickAndMortyApi";
 import { ref, watch } from "vue";
 import { GetAllLocationsInterface } from "@/interfaces/location.interface.ts";
 import { useLocationStore } from "@/stores/location";
@@ -14,7 +14,7 @@ export function useLocations() {
   const getAllLocations = () => {
     loadMore.value = false;
     let currentSearch: string = search.value;
-    http
+    rickAndMortyApi
       .get<GetAllLocationsInterface>(
         `location?page=${page.value}&name=${currentSearch}`
       )

@@ -1,4 +1,4 @@
-import { http } from "@/http/http.service";
+import { rickAndMortyApi } from "@/api/rickAndMortyApi";
 import { ref, watch } from "vue";
 import { GetAllEpisodesInterface } from "@/interfaces/episode.interface.ts";
 import { useEpisodeStore } from "@/stores/episode";
@@ -14,7 +14,7 @@ export function useEpisodes() {
   const getAllEpisodes = () => {
     loadMore.value = false;
     let currentSearch: string = search.value;
-    http
+    rickAndMortyApi
       .get<GetAllEpisodesInterface>(
         `episode?page=${page.value}&name=${currentSearch}`
       )

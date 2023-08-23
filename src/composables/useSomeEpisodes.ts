@@ -1,4 +1,4 @@
-import { http } from "@/http/http.service";
+import { rickAndMortyApi } from "@/api/rickAndMortyApi";
 import { ref } from "vue";
 import { Episode } from "@/interfaces/episode.interface.ts";
 
@@ -6,7 +6,7 @@ export function useSomeEpisodes() {
   const episodes = ref<Episode[]>([]);
 
   const getSomeEpisodes = (someEpisodes: string) => {
-    http
+    rickAndMortyApi
       .get<Episode | Episode[]>(`episode/${someEpisodes}`)
       .then((response) => {
         if (Array.isArray(response.data)) {

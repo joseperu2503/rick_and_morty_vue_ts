@@ -1,4 +1,4 @@
-import { http } from "@/http/http.service";
+import { rickAndMortyApi } from "@/api/rickAndMortyApi";
 import { GetAllCharactersInterface } from "@/interfaces/character.interface.ts";
 import { useCharacterStore } from "@/stores/character";
 import { storeToRefs } from "pinia";
@@ -14,7 +14,7 @@ export function useCharacters() {
   const getAllCharacters = () => {
     loadMore.value = false;
     let currentSearch: string = search.value;
-    http
+    rickAndMortyApi
       .get<GetAllCharactersInterface>(
         `character?page=${page.value}&name=${currentSearch}`
       )
