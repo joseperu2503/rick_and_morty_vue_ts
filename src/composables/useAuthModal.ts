@@ -88,6 +88,7 @@ export function useAuthModal() {
     loginErrors,
     register,
     registerForm,
-    registerErrors
+    registerErrors,
+    loading
   }
 }

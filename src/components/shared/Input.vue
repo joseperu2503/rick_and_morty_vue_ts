@@ -4,7 +4,7 @@
     <div class="flex relative items-center">
       <input :value="modelValue" @input="input" :type="type == 'password' ? showPassword ? 'text' : 'password' : type"
         class="h-10 bg-transparent outline-none text-rick-white text-sm block w-full p-2.5" :class="[
-          error ? 'border-red-400 border-b focus:border-red-500 ' : 'border-b border-rick-white focus:border-rick-green-1 transition-all',
+          error ? 'border-red-400 border-b focus:border-red-500 ' : 'border-b border-gray-300 focus:border-rick-green-1 transition-all',
           { 'pr-10': type == 'password' }
         ]" :placeholder="placeholder" :name="name" />
       <Icon v-if="showPassword && type == 'password'" icon="mdi:eye-outline"

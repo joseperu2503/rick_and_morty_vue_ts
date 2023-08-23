@@ -4,16 +4,18 @@
       <div>
         <img src="@/assets/logo.png" class="h-10 cursor-pointer" @click="goHome" />
       </div>
-      <i class="fas fa-bars text-white text-2xl sm:hidden" @click="toggleSidebar"></i>
       <nav class="hidden text-white text-md sm:flex gap-4 md:gap-8 items-center">
         <router-link active-class="active" :to="link.url" class="neon leading-none" v-for="link in links">
           {{ link.label }}
         </router-link>
-        <Button type="outline" @click="showAuthModal = !showAuthModal" v-if="!user">
+      </nav>
+      <div class="flex items-center gap-4">
+        <Button type="outline" @click="showAuthModal = !showAuthModal" v-if="!user" class="z-0">
           Login
         </Button>
         <AuthMenu v-else/>
-      </nav>
+        <i class="fas fa-bars text-white text-2xl sm:hidden" @click="toggleSidebar"></i>
+      </div>
     </div>
     <div class="bg-black w-full h-16 fixed top-0 z-10" :style="`opacity: ${opacity};`"></div>
     <div class="fixed top-0 right-0 left-0 bottom-0 bg-black/70 z-10 backdrop-blur-sm transition-all"
