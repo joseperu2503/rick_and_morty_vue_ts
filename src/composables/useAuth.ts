@@ -1,27 +1,33 @@
 
 import { useToken } from '@/composables/useToken'
 import { useAuthStore } from '@/stores/auth'
+import { useCharacterStore } from '@/stores/character'
 import { storeToRefs } from 'pinia'
 
 export function useAuth() {
-  const tokenService = useToken()
+  const { validToken, decodeToken } = useToken()
   const authStore = useAuthStore()
   const { user } = storeToRefs(authStore)
+  const characterStore = useCharacterStore();
+  const { favoriteCharacters } = storeToRefs(characterStore);
 
   const verifyAuth = () => {
-    const isValidToken = tokenService.isValidToken()
+    const isValidToken = validToken()
     if (isValidToken) {
-      const decodeToken = tokenService.decodeToken()
-      if (decodeToken) {
+      const decodedToken = decodeToken()
+      if (decodedToken) {
         user.value = {
-          name: decodeToken.name,
-          id: decodeToken.id,
-          email: decodeToken.email
+          name: decodedToken.name,
+          id: decodedToken.id,
+          email: decodedToken.email
         }
       }
     } else {
       user.value = null;
+      favoriteCharacters.value = []
     }
+
+    return isValidToken;
   }
 
   return {

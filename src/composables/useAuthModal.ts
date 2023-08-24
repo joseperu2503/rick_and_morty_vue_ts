@@ -11,9 +11,15 @@ import { RegisterErrors, RegisterForm, initRegisterForm } from '@/interfaces/reg
 export function useAuthModal() {
   const authStore = useAuthStore()
   const { showAuthModal } = storeToRefs(authStore);
-
   const closeAuthModal = () => {
     showAuthModal.value = false
+    resetLoginForm()
+    resetRegisterForm()
+    form.value = 'login'
+  }
+
+  const openAuthModal = () => {
+    showAuthModal.value = true
     resetLoginForm()
     resetRegisterForm()
     form.value = 'login'
@@ -24,8 +30,8 @@ export function useAuthModal() {
     form.value = form.value == 'login' ? 'register' : 'login'
   }
 
-  const tokenService = useToken()
-  const auth = useAuth();
+  const { saveToken } = useToken()
+  const { verifyAuth } = useAuth();
   const loading = ref(false);
 
   //logica del login
@@ -41,8 +47,8 @@ export function useAuthModal() {
     loading.value = true
     try {
       let response = await authApi.post("/login", loginForm.value)
-      tokenService.saveToken(response.data.access_token)
-      auth.verifyAuth()
+      saveToken(response.data.access_token)
+      verifyAuth()
       closeAuthModal()
     } catch (error: any) {
       if (error.response.status === 422) {
@@ -89,6 +95,7 @@ export function useAuthModal() {
     register,
     registerForm,
     registerErrors,
-    loading
+    loading,
+    openAuthModal
   }
 }

@@ -3,12 +3,12 @@ import { useToken } from '@/composables/useToken'
 import { useAuth } from './useAuth';
 
 export function useLogout() {
-  const tokenService = useToken()
-  const auth = useAuth();
+  const { removeToken } = useToken()
+  const { verifyAuth } = useAuth();
 
   const logout = () => {
-    tokenService.removeToken()
-    auth.verifyAuth()
+    removeToken()
+    verifyAuth()
   }
 
   return {

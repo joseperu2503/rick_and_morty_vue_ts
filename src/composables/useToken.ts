@@ -23,7 +23,7 @@ export function useToken() {
     removeCookie('token')
   }
 
-  const isValidToken = () => {
+  const validToken = () => {
     const decodedToken = decodeToken()
     if (!decodedToken) {
       return false
@@ -51,7 +51,7 @@ export function useToken() {
     saveToken,
     getToken,
     removeToken,
-    isValidToken,
+    validToken,
     decodeToken
   }
 }
