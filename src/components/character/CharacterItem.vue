@@ -1,7 +1,7 @@
 <template>
   <div class="relative cursor-pointer hover:scale-110 transition-all w-full aspect-square overflow-hidden rounded-2xl"
     :class="{ 'animate-pulse': !imageLoaded && !imageError }">
-    <div class="absolute right-1 top-1 p-1 backdrop-blur-md bg-black/30 rounded-full">
+    <div class="absolute right-1 top-1 p-1 bg-black/40 rounded-full">
       <Icon icon="material-symbols:favorite" class="w-6 h-6 text-rick-white" @click="removeFavoriteCharacter()"
         v-if="isFavorite" />
       <Icon icon="material-symbols:favorite-outline" class="w-6 h-6 text-rick-white" @click="addFavoriteCharacter()"

@@ -56,7 +56,7 @@ export function useAuthModal() {
       closeAuthModal()
       getFavoriteCharacters()
     } catch (error: any) {
-      if (error.response.status === 422) {
+      if (error.response?.status === 422) {
         loginErrors.value = error.response.data.errors;
       }
     }
