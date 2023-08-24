@@ -82,7 +82,7 @@ export function useAuthModal() {
       }
       login()
     } catch (error: any) {
-      if (error.response.status === 422) {
+      if (error.response?.status === 422) {
         registerErrors.value = error.response.data.errors;
       }
     }
