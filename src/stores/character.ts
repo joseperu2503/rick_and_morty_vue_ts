@@ -7,6 +7,7 @@ export const useCharacterStore = defineStore("character", () => {
   const page = ref<number>(1);
   const numPages = ref<number>(2);
   const search = ref("");
+  const favoriteCharacters = ref<number[]>([])
 
-  return { characters, page, numPages, search };
+  return { characters, page, numPages, search, favoriteCharacters };
 });

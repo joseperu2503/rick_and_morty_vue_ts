@@ -1,6 +1,6 @@
 <template>
   <div class="relative" ref="target">
-    <button @click="toggleMenu" class="h-8 w-8 bg-rick-green-1 flex justify-center items-center rounded-full">
+    <button @click="toggleMenu" class="h-8 w-8 bg-rick-green-1 flex justify-center items-center rounded-full text-rick-white font-semibold">
       {{ nameInitial }}
     </button>
     <div class="backdrop-blur-md bg-black/50 absolute right-0 top-full translate-y-2 rounded-md px-6 py-2 pb-4 text-rick-white"

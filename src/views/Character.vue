@@ -10,13 +10,20 @@
 
       <div class="mx-auto md:mx-0 w-full max-w-2xl">
         <div class="flex flex-col gap-3 items-center md:items-start justify-between h-full">
-          <h1
-            class="text-rick-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 lg:mb-0 font-semibold transition-all duration-500"
-            :class="[showCharacter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full']">
-            {{ character.name }}
-          </h1>
-          <div
-            :class="[showCharacter ? 'opacity-100' : 'opacity-0']"
+          <div class="flex justify-between items-center w-full max-w-xl">
+            <h1
+              class="text-rick-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold transition-all duration-500"
+              :class="[showCharacter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full']">
+              {{ character.name }}
+            </h1>
+            <div class="p-1 backdrop-blur-md bg-black/30 rounded-full cursor-pointer hover:scale-110 transition-all">
+              <Icon icon="material-symbols:favorite" class="w-6 h-6 sm:w-8 sm:h-8 text-rick-white" @click="removeFavoriteCharacter()"
+                v-if="isFavorite" />
+              <Icon icon="material-symbols:favorite-outline" class="w-6 h-6 sm:w-8 sm:h-8 text-rick-white"
+                @click="addFavoriteCharacter()" v-if="!isFavorite" />
+            </div>
+          </div>
+          <div :class="[showCharacter ? 'opacity-100' : 'opacity-0']"
             class="w-full max-w-xl backdrop-blur-sm bg-black/50 shadow-sm shadow-rick-green-1 rounded-lg py-4 px-8 flex flex-col gap-2 justify-between transition-all duration-700">
             <div class="flex gap-4 justify-between items-center">
               <span class="text-rick-3 text-sm sm:text-base">GENDER</span>
@@ -65,6 +72,7 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from "vue-router";
 import { useCharacter } from "@/composables/useCharacter";
 import EpisodeItem from "@/components/episode/EpisodeItem.vue";
+import { useFavorites } from '@/composables/useFavorites';
 
 const route = useRoute();
 const router = useRouter();
@@ -98,4 +106,7 @@ const onImageLoad = () => {
 const onImageError = () => {
   imageError.value = true;
 };
+
+const { addFavoriteCharacter, removeFavoriteCharacter, isFavorite } = useFavorites(parseInt(characterId));
+
 </script>
