@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 import { useBodyScroll } from "@/composables/useBodyScroll";
 import { defineAsyncComponent } from "vue";
-import { useFavorites } from "./composables/useFavorites";
+import { useFavorites } from "@/composables/useFavorites";
 const AppHeader = defineAsyncComponent(() => import("@/components/shared/AppHeader.vue"))
 useBodyScroll()
 

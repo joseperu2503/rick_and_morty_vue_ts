@@ -2,8 +2,8 @@ import { authApi } from "@/api/authApi";
 import { useCharacterStore } from "@/stores/character";
 import { storeToRefs } from "pinia";
 import { computed } from 'vue';
-import { useAuthModal } from "./useAuthModal";
-import { useAuth } from "./useAuth";
+import { useAuthModal } from "@/composables/useAuthModal";
+import { useAuth } from "@/composables/useAuth";
 
 export function useFavorites(characterId?: number) {
   const characterStore = useCharacterStore();

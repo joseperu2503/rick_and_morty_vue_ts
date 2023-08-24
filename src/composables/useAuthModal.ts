@@ -7,6 +7,7 @@ import { useAuth } from '@/composables/useAuth';
 import { LoginErrors, LoginForm, initLoginForm } from '@/interfaces/login.interface';
 import { authApi } from '@/api/authApi';
 import { RegisterErrors, RegisterForm, initRegisterForm } from '@/interfaces/register.interface';
+import { useFavorites } from "@/composables/useFavorites";
 
 export function useAuthModal() {
   const authStore = useAuthStore()
@@ -44,12 +45,16 @@ export function useAuthModal() {
   }
 
   const login = async () => {
+    //no defino useFavorites en useAuthModal por que me da error de Maximum call stack size exceeded
+    const { getFavoriteCharacters } = useFavorites()
+
     loading.value = true
     try {
       let response = await authApi.post("/login", loginForm.value)
       saveToken(response.data.access_token)
       verifyAuth()
       closeAuthModal()
+      getFavoriteCharacters()
     } catch (error: any) {
       if (error.response.status === 422) {
         loginErrors.value = error.response.data.errors;
