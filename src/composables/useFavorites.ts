@@ -8,7 +8,7 @@ import { useAuth } from "@/composables/useAuth";
 export function useFavorites(characterId?: number) {
   const characterStore = useCharacterStore();
   const { favoriteCharacters } = storeToRefs(characterStore);
-  const { verifyAuth, } = useAuth()
+  const { verifyAuth } = useAuth()
   const { openAuthModal } = useAuthModal()
 
   const getFavoriteCharacters = async () => {
@@ -44,7 +44,9 @@ export function useFavorites(characterId?: number) {
   }
 
   const isFavorite = computed(() => {
-    if (!characterId) return false;
+    if (!characterId) {
+      return false;
+    }
     return favoriteCharacters.value.includes(characterId)
   })
 
